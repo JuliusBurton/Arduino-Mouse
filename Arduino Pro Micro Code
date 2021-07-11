@@ -1,0 +1,71 @@
+// Libary
+
+#include <Mouse.h>
+
+// Variables
+
+int selPin2 = 2;
+int selPin3 = 3;
+int selPin4 = 4;
+
+
+int mouseLeftClickFlag = 0;
+int mouseMiddleClickFlag = 0;
+int mouseRightClickFlag = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(selPin2, INPUT);
+  digitalWrite(selPin2, HIGH);
+  pinMode(selPin3, INPUT);
+  digitalWrite(selPin3, HIGH);
+  pinMode(selPin4, INPUT);
+  digitalWrite(selPin4, HIGH);
+  delay(1000);
+  
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  // LMB
+
+  if ((digitalRead(selPin2) == 0) && (!mouseLeftClickFlag))                                        // if the LMB in pressed
+  {
+    mouseLeftClickFlag = 1;
+    Mouse.release(MOUSE_LEFT);                                                                     // click the left button down
+  }
+  else if ((digitalRead(selPin2))&&(mouseLeftClickFlag))                                           // if the LMB is not pressed
+  {
+    mouseLeftClickFlag = 0;
+    Mouse.press(MOUSE_LEFT);                                                                     // release the left button
+  }
+
+  // MMB
+
+  if ((digitalRead(selPin3) == 0) && (!mouseMiddleClickFlag))                                        // if the MMB in pressed
+  {
+    mouseMiddleClickFlag = 1;
+    Mouse.release(MOUSE_MIDDLE);                                                                          // click the middle button down
+  }
+  else if ((digitalRead(selPin3))&&(mouseMiddleClickFlag))                                           // if the MMB is not pressed
+  {
+    mouseMiddleClickFlag = 0;
+    Mouse.press(MOUSE_MIDDLE);// release the middle button
+  }
+
+  // RMB
+
+    if ((digitalRead(selPin4) == 0) && (!mouseRightClickFlag))                                        // if the RMB in pressed
+  {
+    mouseRightClickFlag = 1;
+    Mouse.release(MOUSE_RIGHT);                                                                        // click the right button down
+  }
+  else if ((digitalRead(selPin4))&&(mouseRightClickFlag))                                           // if the RMB is not pressed
+  {
+    mouseRightClickFlag = 0;
+    Mouse.press(MOUSE_RIGHT);                                                                        // release the right button
+  }
+}
